@@ -16,6 +16,8 @@ services:
       dockerfile: django.dockerfile
     volumes:
       - ../django:/app:cached
+    depends_on:
+      - postgre
 
   nginx:
     container_name: chinook-nginx
@@ -27,3 +29,21 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    depends_on:
+      - django
+
+  postgre:
+    container_name: postgre
+    hostname: postgre
+    stdin_open: true
+    tty: true
+    image: postgres:9.6-alpine
+    environment:
+      POSTGRES_PASSWORD: chinook
+      POSTGRES_USER: chinook
+      POSTGRES_DB: chinook
+    volumes:
+      - ./files/sql/:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+

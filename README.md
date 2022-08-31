@@ -5,6 +5,14 @@ Web app to visually edit the Chinook database
 
 ## Local development
 
+### Download latest Chinook database
+
+From Github:
+
+```bash
+wget -O ./docker/files/sql/chinook.sql https://github.com/lerocha/chinook-database/raw/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql
+```
+
 ### Declare local domain
 
 Before running the app, the local domain chinook.local has to be referenced in our local domaine name resolver (`/etc/hosts`):
