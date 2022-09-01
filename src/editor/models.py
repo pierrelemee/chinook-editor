@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Album(models.Model):
-    id = models.IntegerField(db_column='AlbumId', primary_key=True)
+    id = models.AutoField(db_column='AlbumId', primary_key=True)
     title = models.CharField(db_column='Title', max_length=160)
     artist = models.ForeignKey('Artist', models.DO_NOTHING, db_column='ArtistId')
 
@@ -12,7 +12,7 @@ class Album(models.Model):
 
 
 class Artist(models.Model):
-    id = models.IntegerField(db_column='ArtistId', primary_key=True)
+    id = models.AutoField(db_column='ArtistId', primary_key=True)
     name = models.CharField(db_column='Name', max_length=120, blank=True, null=True)
 
     class Meta:
@@ -21,7 +21,7 @@ class Artist(models.Model):
 
 
 class Customer(models.Model):
-    id = models.IntegerField(db_column='CustomerId', primary_key=True)
+    id = models.AutoField(db_column='CustomerId', primary_key=True)
     firstname = models.CharField(db_column='FirstName', max_length=40)
     lastname = models.CharField(db_column='LastName', max_length=20)
     company = models.CharField(db_column='Company', max_length=80, blank=True, null=True)
@@ -41,7 +41,7 @@ class Customer(models.Model):
 
 
 class Employee(models.Model):
-    id = models.IntegerField(db_column='EmployeeId', primary_key=True)
+    id = models.AutoField(db_column='EmployeeId', primary_key=True)
     lastname = models.CharField(db_column='LastName', max_length=20)
     firstname = models.CharField(db_column='FirstName', max_length=20)
     title = models.CharField(db_column='Title', max_length=30, blank=True, null=True)
@@ -63,7 +63,7 @@ class Employee(models.Model):
 
 
 class Genre(models.Model):
-    id = models.IntegerField(db_column='GenreId', primary_key=True)
+    id = models.AutoField(db_column='GenreId', primary_key=True)
     name = models.CharField(db_column='Name', max_length=120, blank=True, null=True)
 
     class Meta:
@@ -72,7 +72,7 @@ class Genre(models.Model):
 
 
 class Invoice(models.Model):
-    id = models.IntegerField(db_column='InvoiceId', primary_key=True)
+    id = models.AutoField(db_column='InvoiceId', primary_key=True)
     customer = models.ForeignKey(Customer, models.DO_NOTHING, db_column='CustomerId')
     invoicedate = models.DateTimeField(db_column='InvoiceDate')
     billingaddress = models.CharField(db_column='BillingAddress', max_length=70, blank=True, null=True)
@@ -88,7 +88,7 @@ class Invoice(models.Model):
 
 
 class Invoiceline(models.Model):
-    id = models.IntegerField(db_column='InvoiceLineId', primary_key=True)
+    id = models.AutoField(db_column='InvoiceLineId', primary_key=True)
     invoice = models.ForeignKey(Invoice, models.DO_NOTHING, db_column='InvoiceId')
     track = models.ForeignKey('Track', models.DO_NOTHING, db_column='TrackId')
     unitprice = models.DecimalField(db_column='UnitPrice', max_digits=10, decimal_places=2)
@@ -100,7 +100,7 @@ class Invoiceline(models.Model):
 
 
 class Mediatype(models.Model):
-    id = models.IntegerField(db_column='MediaTypeId', primary_key=True)
+    id = models.AutoField(db_column='MediaTypeId', primary_key=True)
     name = models.CharField(db_column='Name', max_length=120, blank=True, null=True)
 
     class Meta:
@@ -109,7 +109,7 @@ class Mediatype(models.Model):
 
 
 class Playlist(models.Model):
-    id = models.IntegerField(db_column='PlaylistId', primary_key=True)
+    id = models.AutoField(db_column='PlaylistId', primary_key=True)
     name = models.CharField(db_column='Name', max_length=120, blank=True, null=True)
 
     class Meta:
@@ -128,7 +128,7 @@ class PlaylistTrack(models.Model):
 
 
 class Track(models.Model):
-    id = models.IntegerField(db_column='TrackId', primary_key=True)
+    id = models.AutoField(db_column='TrackId', primary_key=True)
     name = models.CharField(db_column='Name', max_length=200)
     album = models.ForeignKey(Album, models.DO_NOTHING, db_column='AlbumId', blank=True, null=True)
     mediatype = models.ForeignKey(Mediatype, models.DO_NOTHING, db_column='MediaTypeId')
