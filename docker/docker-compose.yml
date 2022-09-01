@@ -1,11 +1,11 @@
-version: "3.9"
+version: "3"
 
 # Use tty: true to get nice output from commands like yarn install and nuxt
 # Use :cached to get better performances on read-heavy workloads, typically the mounted code will be edited on the host, and read on the docker
 # Use :delegated to get better performances on docker write workloads where the sync with the host is not mandatory, typically node_modules directory
 # More info here : https://tkacz.pro/docker-volumes-cached-vs-delegated/
 
-name: chinook-editor
+#name: chinook
 services:
   django:
     container_name:   django
@@ -14,10 +14,11 @@ services:
     tty: true
     build:
       dockerfile: django.dockerfile
+      context: .
     volumes:
-      - ../django:/app:cached
+      - ../src:/app:cached
     depends_on:
-      - postgre
+      - postgres
 
   nginx:
     container_name: chinook-nginx
@@ -26,15 +27,16 @@ services:
     tty: true
     build:
       dockerfile: nginx.dockerfile
+      context: .
     ports:
       - "80:80"
       - "443:443"
     depends_on:
       - django
 
-  postgre:
-    container_name: postgre
-    hostname: postgre
+  postgres:
+    container_name: postgres
+    hostname: postgres
     stdin_open: true
     tty: true
     image: postgres:9.6-alpine
@@ -46,4 +48,3 @@ services:
       - ./files/sql/:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
-
