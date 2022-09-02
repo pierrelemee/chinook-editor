@@ -82,6 +82,8 @@ DATABASES = {
         'PASSWORD': 'chinook',
         'HOST': 'postgres',
         'PORT': '5432',
+        'CHARSET': 'utf8',
+        'COLLATION': 'utf8_general_ci',
     }
 }
 

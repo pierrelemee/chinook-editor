@@ -1,17 +1,12 @@
 # chinook-editor
 
-Web app to visually edit the Chinook database
+Web app to visually edit [the Yugabyte's open database **Chinook**](https://docs.yugabyte.com/preview/sample-data/chinook/).
+
+<u>**Note:**</u> as auto incremented files and UTF-8 support was required for this project, the original database has been modified
+in scripts under `docker/files/sql`.
 
 
 ## Local development
-
-### Download latest Chinook database
-
-From Github:
-
-```bash
-wget -O ./docker/files/sql/chinook.sql https://github.com/lerocha/chinook-database/raw/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql
-```
 
 ### Declare local domain
 
