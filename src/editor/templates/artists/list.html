@@ -5,10 +5,41 @@
 {% block content %}
 <div class="px-4 py-3 my-2 text-center col-lg-12">
     <div class="container">
-        <div class="row align-items-center justify-content-center col-lg-12">
+        <div class="row align-items-start justify-content-center col-lg-12">
             <div class="card col col-lg-6">
                 <div class="card-body">
                     <h3 class="card-title">Artists</h3>
+
+                    <div class="btn-group btn-group-md" role="group" aria-label="">
+                        <a type="button" class="btn btn-primary" href="{% url 'artist_create' %}">Create new</a>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Albums</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for artist in results %}
+                            <tr>
+                                <th scope="row">{{ artist.id }}</th>
+                                <td>{{ artist.name }}</td>
+                                <td>{{ artist.album_set.count }}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="">
+                                        <a type="button" class="btn btn-primary" href="{% url 'artist_edit' artist.id %}">Edit</a>
+                                        <button type="button" class="btn btn-danger">Delete</button>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center align-items-stretch">
@@ -49,15 +80,7 @@
                         </ul>
                     </nav>
 
-                    <ul class="list-group">
-                    {% for artist in results %}
-                        <li class="list-group-item">{{  artist.name }}</li>
-                    {% endfor %}
-                    </ul>
-
                 </div>
-
-
             </div>
         </div>
     </div>

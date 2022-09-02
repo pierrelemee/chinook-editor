@@ -1,6 +1,4 @@
 from django import template
-from django.core.paginator import Paginator, Page
-
 
 register = template.Library()
 
