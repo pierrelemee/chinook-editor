@@ -6,4 +6,5 @@ urlpatterns = [
     path("artists", views.artists, name="artists"),
     path("artist/create", views.artist_create, name="artist_create"),
     path("artist/<int:id>/edit", views.artist_edit, name="artist_edit"),
+    path("artist/<int:id>/delete", views.artist_delete, name="artist_delete"),
 ]

@@ -1,6 +1,8 @@
+from django.contrib.messages import SUCCESS
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods
+from django.contrib import messages
 
 from editor.forms import ArtistForm
 from editor.models import Artist
@@ -53,3 +55,12 @@ def artist_create(request):
         form = ArtistForm()
 
     return render(request, 'artists/edit.html', {'form': form})
+
+
+@require_http_methods(["POST"])
+def artist_delete(request, id):
+    artist = get_object_or_404(Artist, id=id)
+    artist.delete()
+    messages.add_message(request, level=SUCCESS, message=f'Artist "{artist.name}" has been successfully deleted')
+
+    return redirect('artists', permanent=False)

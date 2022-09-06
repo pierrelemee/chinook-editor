@@ -6,6 +6,14 @@
 <div class="px-4 py-3 my-2 text-center col-lg-12">
     <div class="container">
         <div class="row align-items-start justify-content-center col-lg-12">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
             <div class="card col col-lg-6">
                 <div class="card-body">
                     <h3 class="card-title">Artists</h3>
@@ -28,11 +36,33 @@
                             <tr>
                                 <th scope="row">{{ artist.id }}</th>
                                 <td>{{ artist.name }}</td>
-                                <td>{{ artist.album_set.count }}</td>
+                                <td>{{ artist.albums.count }}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group" aria-label="">
                                         <a type="button" class="btn btn-primary" href="{% url 'artist_edit' artist.id %}">Edit</a>
-                                        <button type="button" class="btn btn-danger">Delete</button>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-artist-delete-{{ artist.id }}">Delete</button>
+
+                                        <div class="modal" tabindex="-1" id="modal-artist-delete-{{ artist.id }}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Delete artist</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Do you really want to delete artist "{{ artist.name }}" ?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <form method="post" action="{% url 'artist_delete' artist.id %}">
+                                                            {% csrf_token %}
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </td>
